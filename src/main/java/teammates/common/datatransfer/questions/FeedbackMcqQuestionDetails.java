@@ -34,6 +34,7 @@ public class FeedbackMcqQuestionDetails extends FeedbackQuestionDetails {
     private List<String> mcqChoices;
     private boolean otherEnabled;
     private FeedbackParticipantType generateOptionsFor;
+    private boolean isExculdingSelf = true;
 
     public FeedbackMcqQuestionDetails() {
         super(FeedbackQuestionType.MCQ);
@@ -247,7 +248,7 @@ public class FeedbackMcqQuestionDetails extends FeedbackQuestionDetails {
             List<StudentAttributes> studentList = StudentsLogic.inst().getStudentsForCourse(courseId);
 
             for (StudentAttributes student : studentList) {
-                if(email.equalsIgnoreCase(student.email))
+                if(email.equalsIgnoreCase(student.email) && isExculdingSelf)
                     break;
                 optionList.add(student.name + " (" + student.team + ")");
             }
