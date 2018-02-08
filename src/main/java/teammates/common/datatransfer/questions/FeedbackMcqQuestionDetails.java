@@ -249,7 +249,7 @@ public class FeedbackMcqQuestionDetails extends FeedbackQuestionDetails {
 
             for (StudentAttributes student : studentList) {
                 if(email.equalsIgnoreCase(student.email) && isExculdingSelf)
-                    break;
+                    continue;
                 optionList.add(student.name + " (" + student.team + ")");
             }
 
