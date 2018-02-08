@@ -228,8 +228,8 @@ public class FeedbackSubmissionEditPageData extends PageData {
         return new FeedbackSubmissionEditQuestion(questionAttributes, qnIndx, isModeratedQuestion);
     }
 
-    private List<FeedbackSubmissionEditResponse> createResponses(
-                                    FeedbackQuestionAttributes questionAttributes, int qnIndx, int numOfResponseBoxes, String email) {
+    private List<FeedbackSubmissionEditResponse> createResponses(FeedbackQuestionAttributes questionAttributes,
+                                    int qnIndx, int numOfResponseBoxes, String email) {
         List<FeedbackSubmissionEditResponse> responses = new ArrayList<>();
 
         List<FeedbackResponseAttributes> existingResponses = bundle.questionResponseBundle.get(questionAttributes);
@@ -256,11 +256,13 @@ public class FeedbackSubmissionEditPageData extends PageData {
 
         while (responseIndx < numOfResponseBoxes) {
             String useCorrectEmail;
-            if(isPreview || isModeration) {
+
+            if (isPreview || isModeration) {
                 useCorrectEmail = email;
             } else {
                 useCorrectEmail = student.email;
             }
+
             List<String> recipientOptionsForQuestion = getRecipientOptionsForQuestion(questionAttributes.getId(), null);
             String submissionFormHtml = questionAttributes.getQuestionDetails()
                                             .getQuestionWithoutExistingResponseSubmissionFormHtml(

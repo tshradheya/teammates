@@ -36,7 +36,7 @@ public class FeedbackMsqQuestionDetails extends FeedbackQuestionDetails {
     private FeedbackParticipantType generateOptionsFor;
     private int maxSelectableChoices;
     private int minSelectableChoices;
-    private  boolean isExculdingSelf = true;
+    private boolean isExculdingSelf = true;
 
     public FeedbackMsqQuestionDetails() {
         super(FeedbackQuestionType.MSQ);
@@ -341,8 +341,9 @@ public class FeedbackMsqQuestionDetails extends FeedbackQuestionDetails {
                     StudentsLogic.inst().getStudentsForCourse(courseId);
 
             for (StudentAttributes student : studentList) {
-                if(email.equalsIgnoreCase(student.email) && isExculdingSelf)
+                if (email.equalsIgnoreCase(student.email) && isExculdingSelf) {
                     continue;
+                }
                 optionList.add(student.name + " (" + student.team + ")");
             }
 

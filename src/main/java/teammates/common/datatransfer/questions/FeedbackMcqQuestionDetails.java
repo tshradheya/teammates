@@ -26,7 +26,6 @@ import teammates.common.util.Templates.FeedbackQuestion.Slots;
 import teammates.logic.core.CoursesLogic;
 import teammates.logic.core.InstructorsLogic;
 import teammates.logic.core.StudentsLogic;
-import teammates.ui.pagedata.PageData;
 import teammates.ui.template.InstructorFeedbackResultsResponseRow;
 
 public class FeedbackMcqQuestionDetails extends FeedbackQuestionDetails {
@@ -248,8 +247,9 @@ public class FeedbackMcqQuestionDetails extends FeedbackQuestionDetails {
             List<StudentAttributes> studentList = StudentsLogic.inst().getStudentsForCourse(courseId);
 
             for (StudentAttributes student : studentList) {
-                if(email.equalsIgnoreCase(student.email) && isExculdingSelf)
+                if (email.equalsIgnoreCase(student.email) && isExculdingSelf) {
                     continue;
+                }
                 optionList.add(student.name + " (" + student.team + ")");
             }
 
