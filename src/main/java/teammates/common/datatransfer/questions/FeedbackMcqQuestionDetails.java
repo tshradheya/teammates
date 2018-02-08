@@ -26,6 +26,7 @@ import teammates.common.util.Templates.FeedbackQuestion.Slots;
 import teammates.logic.core.CoursesLogic;
 import teammates.logic.core.InstructorsLogic;
 import teammates.logic.core.StudentsLogic;
+import teammates.ui.pagedata.PageData;
 import teammates.ui.template.InstructorFeedbackResultsResponseRow;
 
 public class FeedbackMcqQuestionDetails extends FeedbackQuestionDetails {
@@ -151,7 +152,7 @@ public class FeedbackMcqQuestionDetails extends FeedbackQuestionDetails {
     public String getQuestionWithExistingResponseSubmissionFormHtml(boolean sessionIsOpen, int qnIdx,
             int responseIdx, String courseId, int totalNumRecipients, FeedbackResponseDetails existingResponseDetails) {
         FeedbackMcqResponseDetails existingMcqResponse = (FeedbackMcqResponseDetails) existingResponseDetails;
-        List<String> choices = generateOptionList(courseId);
+        List<String> choices = generateOptionList(courseId, "");
 
         StringBuilder optionListHtml = new StringBuilder();
         String optionFragmentTemplate = FormTemplates.MCQ_SUBMISSION_FORM_OPTIONFRAGMENT;
@@ -193,11 +194,13 @@ public class FeedbackMcqQuestionDetails extends FeedbackQuestionDetails {
 
     @Override
     public String getQuestionWithoutExistingResponseSubmissionFormHtml(
-            boolean sessionIsOpen, int qnIdx, int responseIdx, String courseId, int totalNumRecipients) {
-        List<String> choices = generateOptionList(courseId);
+            boolean sessionIsOpen, int qnIdx, int responseIdx, String courseId, int totalNumRecipients, String email) {
+        List<String> choices = generateOptionList(courseId, email);
 
         StringBuilder optionListHtml = new StringBuilder();
         String optionFragmentTemplate = FormTemplates.MCQ_SUBMISSION_FORM_OPTIONFRAGMENT;
+
+
 
         for (int i = 0; i < choices.size(); i++) {
             String optionFragment =
@@ -233,7 +236,7 @@ public class FeedbackMcqQuestionDetails extends FeedbackQuestionDetails {
                 Slots.MCQ_SUBMISSION_FORM_OPTION_FRAGMENTS, optionListHtml.toString());
     }
 
-    private List<String> generateOptionList(String courseId) {
+    private List<String> generateOptionList(String courseId, String email) {
         List<String> optionList = new ArrayList<>();
 
         switch (generateOptionsFor) {
@@ -244,6 +247,8 @@ public class FeedbackMcqQuestionDetails extends FeedbackQuestionDetails {
             List<StudentAttributes> studentList = StudentsLogic.inst().getStudentsForCourse(courseId);
 
             for (StudentAttributes student : studentList) {
+                if(email.equalsIgnoreCase(student.email))
+                    break;
                 optionList.add(student.name + " (" + student.team + ")");
             }
 

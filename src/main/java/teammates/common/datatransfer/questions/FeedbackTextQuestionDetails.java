@@ -74,7 +74,7 @@ public class FeedbackTextQuestionDetails extends FeedbackQuestionDetails {
 
     @Override
     public String getQuestionWithoutExistingResponseSubmissionFormHtml(
-            boolean sessionIsOpen, int qnIdx, int responseIdx, String courseId, int totalNumRecipients) {
+            boolean sessionIsOpen, int qnIdx, int responseIdx, String courseId, int totalNumRecipients, String email) {
         return Templates.populateTemplate(
                 FormTemplates.TEXT_SUBMISSION_FORM,
                 Slots.IS_SESSION_OPEN, Boolean.toString(sessionIsOpen),

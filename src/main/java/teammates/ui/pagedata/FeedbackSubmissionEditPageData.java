@@ -259,7 +259,7 @@ public class FeedbackSubmissionEditPageData extends PageData {
             String submissionFormHtml = questionAttributes.getQuestionDetails()
                                             .getQuestionWithoutExistingResponseSubmissionFormHtml(
                                                 isSessionOpenForSubmission, qnIndx, responseIndx,
-                                                questionAttributes.courseId, numOfResponseBoxes);
+                                                questionAttributes.courseId, numOfResponseBoxes, student.email);
 
             responses.add(new FeedbackSubmissionEditResponse(responseIndx, false, recipientOptionsForQuestion,
                                                              submissionFormHtml, ""));
