@@ -256,7 +256,7 @@ public class FeedbackSubmissionEditPageData extends PageData {
 
         while (responseIndx < numOfResponseBoxes) {
             String useCorrectEmail;
-            if(isPreview) {
+            if(isPreview || isModeration) {
                 useCorrectEmail = email;
             } else {
                 useCorrectEmail = student.email;

@@ -72,7 +72,7 @@ public class InstructorEditStudentFeedbackPageAction extends Action {
                 + "Course ID: " + courseId;
 
         data.bundle.hideUnmoderatableQuestions();
-        data.init(courseId);
+        data.init("", studentUnderModeration.email, courseId);
 
         return createShowPageResult(Const.ViewURIs.STUDENT_FEEDBACK_SUBMISSION_EDIT, data);
     }
