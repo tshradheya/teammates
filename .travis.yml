@@ -51,6 +51,10 @@ install: true
 script:
   - npm run build
   - ./gradlew appengineStart
+  - ./gradlew sonarqube \
+      -Dsonar.organization=tshradheya-github \
+      -Dsonar.host.url=https://sonarcloud.io \
+      -Dsonar.login=dff1c308c9565d39b913b787c431c63a18a205d7
   - ./gradlew ciTests
 
 after_failure:
