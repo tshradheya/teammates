@@ -33,8 +33,6 @@ apply plugin: "pmd"
 apply plugin: "findbugs"
 apply plugin: "jacoco"
 
-
-
 configurations {
     staticAnalysis
 }
@@ -375,8 +373,6 @@ pmd {
     ruleSetFiles = files("static-analysis/teammates-pmd.xml", "static-analysis/teammates-pmdMain.xml")
     ruleSets = []
 }
-
-
 
 findbugs {
     toolVersion = findbugsVersion
