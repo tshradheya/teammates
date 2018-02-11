@@ -484,7 +484,7 @@ def checkTestNgFailureClosure = { descriptor, result ->
 test {
     useTestNG()
     options.useDefaultListeners = true
-    ignoreFailures false
+    ignoreFailures true
     maxHeapSize = "1g"
     reports.html.enabled = false
     reports.junitXml.enabled = false
