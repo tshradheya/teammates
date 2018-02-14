@@ -44,7 +44,7 @@ public abstract class FeedbackQuestionDetails {
 
     public abstract String getQuestionWithoutExistingResponseSubmissionFormHtml(
                                 boolean sessionIsOpen, int qnIdx, int responseIdx, String courseId,
-                                int totalNumRecipients);
+                                int totalNumRecipients, String email);
 
     public abstract String getQuestionSpecificEditFormHtml(int questionNumber);
 

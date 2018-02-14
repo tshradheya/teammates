@@ -36,6 +36,7 @@ public class FeedbackMsqQuestionDetails extends FeedbackQuestionDetails {
     private FeedbackParticipantType generateOptionsFor;
     private int maxSelectableChoices;
     private int minSelectableChoices;
+    private boolean isExculdingSelf = true;
 
     public FeedbackMsqQuestionDetails() {
         super(FeedbackQuestionType.MSQ);
@@ -120,7 +121,7 @@ public class FeedbackMsqQuestionDetails extends FeedbackQuestionDetails {
         this.msqChoices = new ArrayList<>();
         this.otherEnabled = false;
         this.generateOptionsFor = generateOptionsFor;
-        this.numOfMsqChoices = generateOptionList(courseId).size();
+        this.numOfMsqChoices = generateOptionList(courseId, "").size();
         Assumption.assertTrue("Can only generate students, teams or instructors",
                 generateOptionsFor == FeedbackParticipantType.STUDENTS
                 || generateOptionsFor == FeedbackParticipantType.TEAMS
@@ -185,7 +186,7 @@ public class FeedbackMsqQuestionDetails extends FeedbackQuestionDetails {
             boolean sessionIsOpen, int qnIdx, int responseIdx, String courseId,
             int totalNumRecipients, FeedbackResponseDetails existingResponseDetails) {
         FeedbackMsqResponseDetails existingMsqResponse = (FeedbackMsqResponseDetails) existingResponseDetails;
-        List<String> choices = generateOptionList(courseId);
+        List<String> choices = generateOptionList(courseId, "");
 
         StringBuilder optionListHtml = new StringBuilder();
         String optionFragmentTemplate = FormTemplates.MSQ_SUBMISSION_FORM_OPTIONFRAGMENT;
@@ -258,8 +259,8 @@ public class FeedbackMsqQuestionDetails extends FeedbackQuestionDetails {
 
     @Override
     public String getQuestionWithoutExistingResponseSubmissionFormHtml(
-            boolean sessionIsOpen, int qnIdx, int responseIdx, String courseId, int totalNumRecipients) {
-        List<String> choices = generateOptionList(courseId);
+            boolean sessionIsOpen, int qnIdx, int responseIdx, String courseId, int totalNumRecipients, String email) {
+        List<String> choices = generateOptionList(courseId, email);
 
         StringBuilder optionListHtml = new StringBuilder();
         String optionFragmentTemplate = FormTemplates.MSQ_SUBMISSION_FORM_OPTIONFRAGMENT;
@@ -328,7 +329,7 @@ public class FeedbackMsqQuestionDetails extends FeedbackQuestionDetails {
                         isMinSelectableChoicesEnabled ? Integer.toString(minSelectableChoices) : "-1");
     }
 
-    private List<String> generateOptionList(String courseId) {
+    private List<String> generateOptionList(String courseId, String email) {
         List<String> optionList = new ArrayList<>();
 
         switch (generateOptionsFor) {
@@ -340,6 +341,9 @@ public class FeedbackMsqQuestionDetails extends FeedbackQuestionDetails {
                     StudentsLogic.inst().getStudentsForCourse(courseId);
 
             for (StudentAttributes student : studentList) {
+                if (email.equalsIgnoreCase(student.email) && isExculdingSelf) {
+                    continue;
+                }
                 optionList.add(student.name + " (" + student.team + ")");
             }
 

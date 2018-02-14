@@ -105,7 +105,7 @@ public class FeedbackNumericalScaleQuestionDetails extends
 
     @Override
     public String getQuestionWithoutExistingResponseSubmissionFormHtml(
-            boolean sessionIsOpen, int qnIdx, int responseIdx, String courseId, int totalNumRecipients) {
+            boolean sessionIsOpen, int qnIdx, int responseIdx, String courseId, int totalNumRecipients, String email) {
         return Templates.populateTemplate(
                 FormTemplates.NUMSCALE_SUBMISSION_FORM,
                 Slots.QUESTION_INDEX, Integer.toString(qnIdx),

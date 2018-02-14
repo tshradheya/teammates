@@ -33,6 +33,7 @@ public class FeedbackMcqQuestionDetails extends FeedbackQuestionDetails {
     private List<String> mcqChoices;
     private boolean otherEnabled;
     private FeedbackParticipantType generateOptionsFor;
+    private boolean isExculdingSelf = true;
 
     public FeedbackMcqQuestionDetails() {
         super(FeedbackQuestionType.MCQ);
@@ -151,7 +152,7 @@ public class FeedbackMcqQuestionDetails extends FeedbackQuestionDetails {
     public String getQuestionWithExistingResponseSubmissionFormHtml(boolean sessionIsOpen, int qnIdx,
             int responseIdx, String courseId, int totalNumRecipients, FeedbackResponseDetails existingResponseDetails) {
         FeedbackMcqResponseDetails existingMcqResponse = (FeedbackMcqResponseDetails) existingResponseDetails;
-        List<String> choices = generateOptionList(courseId);
+        List<String> choices = generateOptionList(courseId, "");
 
         StringBuilder optionListHtml = new StringBuilder();
         String optionFragmentTemplate = FormTemplates.MCQ_SUBMISSION_FORM_OPTIONFRAGMENT;
@@ -193,8 +194,8 @@ public class FeedbackMcqQuestionDetails extends FeedbackQuestionDetails {
 
     @Override
     public String getQuestionWithoutExistingResponseSubmissionFormHtml(
-            boolean sessionIsOpen, int qnIdx, int responseIdx, String courseId, int totalNumRecipients) {
-        List<String> choices = generateOptionList(courseId);
+            boolean sessionIsOpen, int qnIdx, int responseIdx, String courseId, int totalNumRecipients, String email) {
+        List<String> choices = generateOptionList(courseId, email);
 
         StringBuilder optionListHtml = new StringBuilder();
         String optionFragmentTemplate = FormTemplates.MCQ_SUBMISSION_FORM_OPTIONFRAGMENT;
@@ -233,7 +234,7 @@ public class FeedbackMcqQuestionDetails extends FeedbackQuestionDetails {
                 Slots.MCQ_SUBMISSION_FORM_OPTION_FRAGMENTS, optionListHtml.toString());
     }
 
-    private List<String> generateOptionList(String courseId) {
+    private List<String> generateOptionList(String courseId, String email) {
         List<String> optionList = new ArrayList<>();
 
         switch (generateOptionsFor) {
@@ -244,6 +245,9 @@ public class FeedbackMcqQuestionDetails extends FeedbackQuestionDetails {
             List<StudentAttributes> studentList = StudentsLogic.inst().getStudentsForCourse(courseId);
 
             for (StudentAttributes student : studentList) {
+                if (email.equalsIgnoreCase(student.email) && isExculdingSelf) {
+                    continue;
+                }
                 optionList.add(student.name + " (" + student.team + ")");
             }
 

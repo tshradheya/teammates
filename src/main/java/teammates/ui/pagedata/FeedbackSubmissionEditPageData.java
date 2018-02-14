@@ -66,7 +66,7 @@ public class FeedbackSubmissionEditPageData extends PageData {
         registerMessage = student == null
                         ? ""
                         : String.format(Const.StatusMessages.UNREGISTERED_STUDENT, student.name, joinUrl);
-        createQuestionsWithResponses();
+        createQuestionsWithResponses(email);
     }
 
     public FeedbackSessionQuestionsBundle getBundle() {
@@ -201,7 +201,7 @@ public class FeedbackSubmissionEditPageData extends PageData {
         return StringHelper.encrypt(student.key);
     }
 
-    private void createQuestionsWithResponses() {
+    private void createQuestionsWithResponses(String email) {
         questionsWithResponses = new ArrayList<>();
         int qnIndx = 1;
 
@@ -214,7 +214,7 @@ public class FeedbackSubmissionEditPageData extends PageData {
             }
             FeedbackSubmissionEditQuestion question = createQuestion(questionAttributes, qnIndx);
             List<FeedbackSubmissionEditResponse> responses =
-                    createResponses(questionAttributes, qnIndx, numOfResponseBoxes);
+                    createResponses(questionAttributes, qnIndx, numOfResponseBoxes, email);
 
             questionsWithResponses.add(new StudentFeedbackSubmissionEditQuestionsWithResponses(
                     question, responses, numOfResponseBoxes, maxResponsesPossible));
@@ -228,8 +228,8 @@ public class FeedbackSubmissionEditPageData extends PageData {
         return new FeedbackSubmissionEditQuestion(questionAttributes, qnIndx, isModeratedQuestion);
     }
 
-    private List<FeedbackSubmissionEditResponse> createResponses(
-                                    FeedbackQuestionAttributes questionAttributes, int qnIndx, int numOfResponseBoxes) {
+    private List<FeedbackSubmissionEditResponse> createResponses(FeedbackQuestionAttributes questionAttributes,
+                                    int qnIndx, int numOfResponseBoxes, String email) {
         List<FeedbackSubmissionEditResponse> responses = new ArrayList<>();
 
         List<FeedbackResponseAttributes> existingResponses = bundle.questionResponseBundle.get(questionAttributes);
@@ -255,11 +255,19 @@ public class FeedbackSubmissionEditPageData extends PageData {
         }
 
         while (responseIndx < numOfResponseBoxes) {
+            String useCorrectEmail;
+
+            if (isPreview || isModeration) {
+                useCorrectEmail = email;
+            } else {
+                useCorrectEmail = student.email;
+            }
+
             List<String> recipientOptionsForQuestion = getRecipientOptionsForQuestion(questionAttributes.getId(), null);
             String submissionFormHtml = questionAttributes.getQuestionDetails()
                                             .getQuestionWithoutExistingResponseSubmissionFormHtml(
                                                 isSessionOpenForSubmission, qnIndx, responseIndx,
-                                                questionAttributes.courseId, numOfResponseBoxes);
+                                                questionAttributes.courseId, numOfResponseBoxes, useCorrectEmail);
 
             responses.add(new FeedbackSubmissionEditResponse(responseIndx, false, recipientOptionsForQuestion,
                                                              submissionFormHtml, ""));
