@@ -46,7 +46,7 @@ module.exports = {
         ],
     },
     stats: 'errors-only',
-    optimization : {
+    optimization: {
         minimize: true,
     },
 };
