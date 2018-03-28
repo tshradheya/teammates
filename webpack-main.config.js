@@ -35,6 +35,7 @@ const babel = {
 
 module.exports = {
     entry,
+    mode: 'production',
     output: {
         filename: '[name].js',
         path: OUTPUT_JS_FOLDER,
