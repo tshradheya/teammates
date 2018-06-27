@@ -239,11 +239,14 @@ public final class Templates {
             public static final String STUDENT_SELECTED = "${studentSelected}";
             public static final String STUDENT_EXCLUDING_SELF_SELECTED = "${studentExcludingSelfSelected}";
             public static final String TEAM_SELECTED = "${teamSelected}";
+            public static final String TEAM_EXCLUDING_SELF_SELECTED = "${teamExcludingSelfSelected}";
             public static final String INSTRUCTOR_SELECTED = "${instructorSelected}";
             public static final String STUDENTS_TO_STRING = "${FeedbackParticipantType.STUDENTS.toString()}";
             public static final String STUDENTS_EXCLUDING_SELF_TO_STRING =
                     "${FeedbackParticipantType.STUDENTS_EXCLUDING_SELF.toString()}";
             public static final String TEAMS_TO_STRING = "${FeedbackParticipantType.TEAMS.toString()}";
+            public static final String TEAMS_EXCLUDING_SELF_TO_STRING =
+                    "${FeedbackParticipantType.TEAMS_EXCLUDING_SELF.toString()}";
             public static final String INSTRUCTORS_TO_STRING = "${FeedbackParticipantType.INSTRUCTORS.toString()}";
             public static final String QUESTION_ADDITIONAL_INFO = "${questionAdditionalInfo}";
             public static final String ADDITIONAL_INFO_ID = "${additionalInfoId}";
@@ -354,20 +357,29 @@ public final class Templates {
             public static final String CONSTSUM_EDIT_FORM_OPTION_FRAGMENT = "${constSumEditFormOptionFragments}";
             public static final String CONSTSUM_NUM_OPTION_VALUE = "${constSumNumOptionValue}";
             public static final String CONSTSUM_POINTS_PER_OPTION_VALUE = "${constSumPointsPerOptionValue}";
-            public static final String CONSTSUM_UNEVEN_DISTRIBUTION_VALUE = "${constSumUnevenDistributionValue}";
             public static final String CONSTSUM_NUM_OPTION = "${Const.ParamsNames.FEEDBACK_QUESTION_CONSTSUMNUMOPTION}";
             public static final String CONSTSUM_POINTS_VALUE = "${constSumPointsValue}";
             public static final String CONSTSUM_NUMBER_OF_OPTIONS = "${numOfConstSumOptions}";
             public static final String CONSTSUM_SELECTED_POINTS_PER_OPTION = "${selectedConstSumPointsPerOption}";
             public static final String CONSTSUM_OPTION_TABLE_VISIBILITY = "${constSumOptionTableVisibility}";
-            public static final String CONSTSUM_DISTRIBUTE_UNEVENLY = "${distributeUnevenly}";
+            public static final String CONSTSUM_UNEVEN_DISTRIBUTION_VALUE = "${constSumUnevenDistributionValue}";
             public static final String CONSTSUM_POINTS = "${constSumPoints}";
             public static final String CONSTSUM_POINTS_RECEIVED = "${pointsReceived}";
             public static final String CONSTSUM_AVERAGE_POINTS = "${averagePoints}";
             public static final String CONSTSUM_TOTAL_POINTS = "${totalPoints}";
             public static final String CONSTSUM_PARAM_OPTION = "${Const.ParamsNames.FEEDBACK_QUESTION_CONSTSUMOPTION}";
+            public static final String CONSTSUM_DISTRIBUTE_UNEVENLY = "${distributeUnevenly}";
             public static final String CONSTSUM_PARAM_DISTRIBUTE_UNEVENLY =
                     "${Const.ParamsNames.FEEDBACK_QUESTION_CONSTSUMDISTRIBUTEUNEVENLY}";
+            public static final String CONSTSUM_DISTRIBUTE_POINTS_OPTIONS =
+                    "${Const.ParamsNames.FEEDBACK_QUESTION_CONSTSUMDISTRIBUTEPOINTSOPTIONS}";
+            public static final String CONSTSUM_DISTRIBUTE_POINTS_FOR_VALUE = "${distributePointsForValue}";
+            public static final String CONSTSUM_DISTRIBUTE_ALL_UNEVENLY_SELECTED = "${distributeAllUnevenlySelected}";
+            public static final String CONSTSUM_DISTRIBUTE_SOME_UNEVENLY_SELECTED = "${distributeSomeUnevenlySelected}";
+            public static final String CONSTSUM_DISTRIBUTE_ALL_UNEVENLY_TO_STRING =
+                    "${FeedbackConstantSumDistributePointsType.DISTRIBUTE_ALL_UNEVENLY.getDisplayedOption()}";
+            public static final String CONSTSUM_DISTRIBUTE_SOME_UNEVENLY_TO_STRING =
+                    "${FeedbackConstantSumDistributePointsType.DISTRIBUTE_SOME_UNEVENLY.getDisplayedOption()}";
             public static final String CONSTSUM_POINTS_PER_OPTION =
                     "${Const.ParamsNames.FEEDBACK_QUESTION_CONSTSUMPOINTSPEROPTION}";
             public static final String CONSTSUM_TOOLTIP_POINTS = "${Const.Tooltips.FEEDBACK_QUESTION_CONSTSUMPOINTS}";
@@ -459,6 +471,8 @@ public final class Templates {
             public static final String RUBRIC_ROW_BODY_FRAGMENTS = "${rubricRowBodyFragments}";
             public static final String TABLE_HEADER_ROW_FRAGMENT_HTML = "${tableHeaderRowFragmentHtml}";
             public static final String TABLE_BODY_HTML = "${tableBodyHtml}";
+            public static final String TABLE_BODY_EXCLUDING_SELF_HTML = "${tableBodyExcludingSelfHtml}";
+            public static final String EXCLUDING_SELF_OPTION_VISIBLE = "${isExcludingSelfOptionAvailable}";
             public static final String SUB_QUESTION = "${subQuestion}";
             public static final String ROW = "${row}";
             public static final String COL = "${col}";

@@ -1,3 +1,4 @@
+<%@ tag trimDirectiveWhitespaces="true" %>
 <%@ tag description="instructorFeedbacks - new feedback question form" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ tag import="teammates.common.util.Const" %>
@@ -29,7 +30,7 @@
           </ul>
         </div>
 
-        <a href="/instructorHelp.jsp#fbQuestionTypes"
+        <a href="/instructorHelp.jsp#questions"
             target="_blank" rel="noopener noreferrer">
           <i class="glyphicon glyphicon-info-sign"></i>
         </a>
