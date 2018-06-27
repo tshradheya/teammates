@@ -34,6 +34,9 @@ module.exports = {
             babel,
         ],
     },
+    optimization: {
+        minimize: false,
+    },
     stats: 'errors-only',
     optimization: {
         minimize: false,
