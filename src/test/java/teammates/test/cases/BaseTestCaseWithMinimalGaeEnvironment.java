@@ -30,7 +30,6 @@ public class BaseTestCaseWithMinimalGaeEnvironment extends BaseTestCase {
         } else {
             SystemProperty.environment.set(SystemProperty.Environment.Value.Development);
         }
-
     }
 
     @BeforeClass
